@@ -6,49 +6,76 @@
     <title>WeatherVista</title>
 </head>
 
-<body>
+<body class="{{ weather.condition if weather else '' }}">
+<div class="overlay">
 
-    <h1>Weather Forecast App</h1>
+    <div class="container">
 
-    <form method="POST">
+        <h1>WeatherVista</h1>
 
-        <input
-    type="text"
-    name="city"
-    placeholder="Enter city name"
-    required
->
+        <form method="POST" id="weatherForm">
 
-        <button type="submit">
-            Search
-        </button>
+            <input
+                type="text"
+                name="city"
+                placeholder="Enter city name"
+                required
+            >
 
-    </form>
+            <button type="submit">
+                Search
+            </button>
 
-    {% if error %}
-        <p>{{ error }}</p>
-    {% endif %}
+        </form>
 
-    {% if weather %}
+        <div id="loading" class="hidden">
+            Loading weather...
+        </div>
 
-        <h2>{{ weather.city }}</h2>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
 
-        <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png">
+        {% if weather %}
 
-        <p>Temperature: {{ weather.temperature }} °C</p>
+        <div class="weather-card">
 
-        <p>Humidity: {{ weather.humidity }}%</p>
+            <h2>{{ weather.city }}</h2>
 
-        <p>Condition: {{ weather.condition }}</p>
+            <img
+                src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png"
+            >
 
-    {% endif %}
-    <p>
-    Feels Like: {{ weather.feels_like }} °C
-</p>
+            <p>
+                Temperature: {{ weather.temperature }} °C
+            </p>
 
-<p>
-    Wind Speed: {{ weather.wind }} m/s
-</p>
+            <p>
+                Feels Like: {{ weather.feels_like }} °C
+            </p>
 
+            <p>
+                Humidity: {{ weather.humidity }}%
+            </p>
+
+            <p>
+                Wind Speed: {{ weather.wind }} m/s
+            </p>
+
+            <p>
+                Condition: {{ weather.condition }}
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+<script
+    src="{{ url_for('static', filename='js/script.js') }}">
+</script>
 </body>
 </html>
+

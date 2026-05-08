@@ -31,7 +31,7 @@ def get_weather(city):
 
             "wind": data["wind"]["speed"],
 
-            "condition": data["weather"][0]["description"],
+            "condition": data["weather"][0]["main"],
 
             "icon": data["weather"][0]["icon"]
         }
