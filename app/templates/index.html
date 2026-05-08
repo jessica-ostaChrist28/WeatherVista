@@ -15,6 +15,9 @@
 
         <form method="POST" id="weatherForm">
 
+             <button type="button" id="locationBtn">
+    Use My Location
+</button>
             <input
                 type="text"
                 name="city"
@@ -28,9 +31,7 @@
 
         </form>
 
-        <div id="loading" class="hidden">
-            Loading weather...
-        </div>
+        <div id="loading" class="hidden spinner"></div>
 
         {% if error %}
             <p class="error">{{ error }}</p>
