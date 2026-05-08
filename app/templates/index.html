@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherVista</title>
+</head>
+
+<body>
+
+    <h1>Weather Forecast App</h1>
+
+    <form method="POST">
+
+        <input
+    type="text"
+    name="city"
+    placeholder="Enter city name"
+    required
+>
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+
+    {% if weather %}
+
+        <h2>{{ weather.city }}</h2>
+
+        <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png">
+
+        <p>Temperature: {{ weather.temperature }} °C</p>
+
+        <p>Humidity: {{ weather.humidity }}%</p>
+
+        <p>Condition: {{ weather.condition }}</p>
+
+    {% endif %}
+    <p>
+    Feels Like: {{ weather.feels_like }} °C
+</p>
+
+<p>
+    Wind Speed: {{ weather.wind }} m/s
+</p>
+
+</body>
+</html>
