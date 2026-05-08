@@ -67,12 +67,38 @@
             </p>
 
         </div>
+        {% if forecast %}
+
+<div class="forecast-container">
+
+    {% for item in forecast %}
+
+    <div class="forecast-card">
+
+        <p>{{ item.time }}</p>
+
+        <img
+            src="https://openweathermap.org/img/wn/{{ item.icon }}@2x.png"
+        >
+
+        <p>{{ item.temp }} °C</p>
+
+        <p>{{ item.condition }}</p>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endif %}
 
         {% endif %}
 
     </div>
 
 </div>
+
 <script
     src="{{ url_for('static', filename='js/script.js') }}">
 </script>

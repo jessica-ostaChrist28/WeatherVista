@@ -177,3 +177,30 @@ button:hover {
 .Rain {
     background: linear-gradient(135deg, #4b79a1, #283e51);
 }
+
+.forecast-container {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+.forecast-card {
+
+    background: rgba(255,255,255,0.1);
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.forecast-card img {
+
+    width: 60px;
+}
