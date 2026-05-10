@@ -1,27 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>WeatherVista</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
 </head>
 
-<body class="{{ weather.condition if weather else '' }}">
+<body>
+
 <div class="overlay">
 
     <div class="container">
+        <div class="user-bar">
 
-        <h1>WeatherVista</h1>
+    <h3>
+        Welcome, {{ user.username }}
+    </h3>
 
-        <form method="POST" id="weatherForm">
+    <a href="{{ url_for('main.logout') }}">
+        Logout
+    </a>
 
-             <button type="button" id="locationBtn">
-    Use My Location
-</button>
+</div>
+
+        <div class="top-bar">
+
+            <h1>WeatherVista</h1>
+
+            <button
+                type="button"
+                id="themeToggle"
+                class="theme-btn"
+            >
+                🌙
+            </button>
+
+        </div>
+
+        <form id="weatherForm">
+
             <input
                 type="text"
-                name="city"
-                placeholder="Enter city name"
+                id="cityInput"
+                placeholder="Search city..."
                 required
             >
 
@@ -31,78 +75,27 @@
 
         </form>
 
+        <button
+            type="button"
+            id="locationBtn"
+            class="location-btn"
+        >
+            📍 Use Current Location
+        </button>
+
+        <div id="recentSearches"></div>
+
         <div id="loading" class="hidden spinner"></div>
 
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
-
-        {% if weather %}
-
-        <div class="weather-card">
-
-            <h2>{{ weather.city }}</h2>
-
-            <img
-                src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png"
-            >
-
-            <p>
-                Temperature: {{ weather.temperature }} °C
-            </p>
-
-            <p>
-                Feels Like: {{ weather.feels_like }} °C
-            </p>
-
-            <p>
-                Humidity: {{ weather.humidity }}%
-            </p>
-
-            <p>
-                Wind Speed: {{ weather.wind }} m/s
-            </p>
-
-            <p>
-                Condition: {{ weather.condition }}
-            </p>
-
-        </div>
-        {% if forecast %}
-
-<div class="forecast-container">
-
-    {% for item in forecast %}
-
-    <div class="forecast-card">
-
-        <p>{{ item.time }}</p>
-
-        <img
-            src="https://openweathermap.org/img/wn/{{ item.icon }}@2x.png"
-        >
-
-        <p>{{ item.temp }} °C</p>
-
-        <p>{{ item.condition }}</p>
-
-    </div>
-
-    {% endfor %}
-
-</div>
-
-{% endif %}
-
-        {% endif %}
+        <div id="weatherResult"></div>
 
     </div>
 
 </div>
 
 <script
-    src="{{ url_for('static', filename='js/script.js') }}">
-</script>
+    src="{{ url_for('static', filename='js/script.js') }}"
+></script>
+
 </body>
 </html>
-
