@@ -11,7 +11,9 @@ def create_app():
 
     app = Flask(__name__)
 
-    app.config["SECRET_KEY"] = "weathervista_secret_key"
+    import os
+
+    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
     app.config["SQLALCHEMY_DATABASE_URI"] = (
         "sqlite:///weathervista.db"
